@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Charlie</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <p>Hej! For at betjene vuggen kan du vælge hastighed og klikke start/stop.</p>
+            </div>
+
+            <div class="col-sm">
+                <button type="button" class="btn btn-success" id="start">Start</button>
+
+                <button type="button" class="btn btn-danger" id="stop">Stop</button>
+
+                <button type="button" class="btn btn-danger" id="force">Force</button>
+            </div>
+            <div class="col-sm">
+                <label for="speed" class="form-label">Hastighed</label> <div id="speed-value"></div>
+                <input type="range" class="form-range" min="1" max="5" step="0.5" id="speed" onchange="speed(this.value)">
+
+                <label for="duration" class="form-label">Duration</label> <div id="duration-value"></div>
+                <input type="range" class="form-range" min="5" max="240" step="5" id="duration" onchange="duration(this.value)">
+            </div>
+
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
