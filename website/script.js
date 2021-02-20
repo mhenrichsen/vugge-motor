@@ -7,11 +7,9 @@ document.onload = function() {
 document.getElementById('start').onclick = function() {
    var speed_val = document.getElementById('speed-value').value
    var duration_val = document.getElementById('duration-value').value
-   var url = new URL('/start')
-   var params = {speed: speed_val, duration: duration_val}
+   console.log(speed_val, duration_val)
 
-   url.search = new URLSearchParams(params).toString()
-   fetch(url)
+   fetch('/start'+'?speed='+speed_val+'&duration='+duration_val)
   .then(response => response.json())
   .then(data => console.log(data));
 }
