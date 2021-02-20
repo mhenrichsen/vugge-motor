@@ -63,6 +63,7 @@ class ThreadingRun(object):
     def vugge(self):
         while True:
             if Info.status and time() < Info.end_time:
+                print("Time left: ", Info.end_time-time())
                 print("Vugge")
                 servo.max()
                 print("max")
