@@ -31,7 +31,7 @@ async def start(speed: float, duration: int):
     Info.status = True
     Info.force = False
     Info.speed = speed
-    Info.start_time = time.time()
+    Info.start_time = time()
     Info.end_time = duration*60 + Info.start_time
 
     return JSONResponse({"res": "started"})
@@ -62,7 +62,7 @@ class ThreadingRun(object):
 
     def vugge(self):
         while True:
-            if Info.status and time.time() < Info.end_time:
+            if Info.status and time() < Info.end_time:
                 print("Vugge")
                 servo.max()
                 print("max")
