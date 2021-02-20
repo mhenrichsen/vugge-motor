@@ -4,34 +4,34 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from gpiozero import Servo
-from time import sleep
+from time import sleep, time
 import threading
 
 myGPIO = 17
-
 myCorrection = 1
 maxPW = (2.0 + myCorrection) / 1000
 minPW = (1.0 - myCorrection) / 1000
-
 servo = Servo(myGPIO, min_pulse_width=minPW, max_pulse_width=maxPW)
+servo.detach()
 
 app = FastAPI()
-
-servo.detach()
 
 
 class Info:
     status = False
     speed = 1
     force = False
+    duration = 60
+    time = 0
 
 
 @app.get("/start")
-async def start(speed: int, duration: int):
+async def start(speed: float, duration: int):
     Info.status = True
     Info.force = False
     Info.speed = speed
-    Info.duration = duration
+    Info.duration = duration*60 + time.time()
+
     return JSONResponse({"res": "started"})
 
 
@@ -53,16 +53,14 @@ async def force():
 
 class ThreadingRun(object):
     def __init__(self, interval=1):
-
         self.interval = interval
-
         thread = threading.Thread(target=self.vugge, args=())
         thread.daemon = False
         thread.start()
 
     def vugge(self):
         while True:
-            if Info.status:
+            if Info.status and time.time() < Info.duration:
                 print("Vugge")
                 servo.max()
                 print("max")
