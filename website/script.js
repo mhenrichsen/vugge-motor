@@ -5,8 +5,8 @@ document.onload = function() {
 }
 
 document.getElementById('start').onclick = function() {
-   var speed_val = document.getElementById('speed-value').value
-   var duration_val = document.getElementById('duration-value').value
+   var speed_val = document.getElementById('speed').value
+   var duration_val = document.getElementById('duration').value
    console.log(speed_val, duration_val)
 
    fetch('/start'+'?speed='+speed_val+'&duration='+duration_val)
