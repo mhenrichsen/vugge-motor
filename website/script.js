@@ -5,7 +5,13 @@ document.onload = function() {
 }
 
 document.getElementById('start').onclick = function() {
-   fetch('/start')
+   var speed_val = document.getElementById('speed-value').value
+   var duration_val = document.getElementById('duration-value').value
+   var url = new URL('/start')
+   var params = {speed: speed_val, duration: duration_val}
+
+   url.search = new URLSearchParams(params).toString()
+   fetch(url)
   .then(response => response.json())
   .then(data => console.log(data));
 }
